@@ -6,6 +6,9 @@
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
   <property environment="env"/>
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar" />
+    </path>
 
   <target name="init">
     <tstamp/>
@@ -21,12 +24,12 @@
 	  <include name="hive-exec-*.jar" />
 	</fileset>
 	<fileset dir="${env.HADOOP_HOME}">
-	  <include name="hadoop-core-*.jar" />
+	  <include name="hadoop-*.jar" />
         </fileset>
 	<fileset dir="${env.HADOOP_HOME}/lib">
-	  <include name="commons-logging-*.jar" />
+	  <include name="commons-*.jar" />
 	</fileset>
-      </classpath>
+</classpath>
     </javac>
   </target>
 
