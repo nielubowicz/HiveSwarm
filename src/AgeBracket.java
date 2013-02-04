@@ -1,4 +1,4 @@
-package com.grooveshark.hive.udf;
+package com.hiveswarm.hive.udf;
 
 import java.lang.Exception;
 import org.apache.hadoop.hive.ql.exec.UDFArgumentException;
