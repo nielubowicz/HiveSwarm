@@ -102,26 +102,25 @@ public class AgeBracket extends GenericUDF {
     if (age <= 0 || age==null) {
       return null;
     }
-    Text ageString=new Text();
     try {
      if (age < 13) {
-ageString.set("underage");
+result.set("underage");
      } else if (age <= 17) {
-         ageString.set("13-17");
+         result.set("13-17");
      } else if (age <= 24) {
-         ageString.set("18-24");
+         result.set("18-24");
      } else if (age <= 34) {
-         ageString.set("25-34");
+         result.set("25-34");
      } else if (age <= 44) {
-         ageString.set("35-44");
+         result.set("35-44");
      } else if (age <= 54) {
-         ageString.set("45-54");
+         result.set("45-54");
      } else {
-         ageString.set("55+");
+         result.set("55+");
      }
   } catch (Exception e) {
-      ageString.set("There was an error");
+      result.set("There was an error");
   };
-      return ageString;
+      return result;
   }
 }
