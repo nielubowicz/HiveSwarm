@@ -18,10 +18,11 @@ import org.apache.hadoop.io.Text;
     + "  > SELECT _FUNC_('2011-08-30') FROM src LIMIT 1;\n"
 	     + "  '2011-08-01'\n") 
 public class FirstDateOfMonth extends UDF {
-  private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-  private final Calendar calendar = Calendar.getInstance();
+  private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+  private final static Calendar calendar = Calendar.getInstance();
 
   private final Text result = new Text();
+  private Date date = null;
 
   public FirstDateOfMonth() {
   }
@@ -39,7 +40,7 @@ public class FirstDateOfMonth extends UDF {
       return null;
     }
     try {
-      Date date = formatter.parse(dateString.toString());
+      date = formatter.parse(dateString.toString());
       calendar.setTime(date);
       calendar.set(java.util.Calendar.DAY_OF_MONTH, 1);
       result.set(formatter.format(calendar.getTime()));

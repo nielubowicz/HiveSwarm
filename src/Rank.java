@@ -24,6 +24,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorFactory.Obje
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorUtils;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Writable;
 
 public class Rank extends GenericUDF {
@@ -32,6 +33,8 @@ public class Rank extends GenericUDF {
   private Object[] previousKey;
   private ObjectInspector[] ois;
 
+  private final LongWritable result = new LongWritable();
+
   @Override
   public Object evaluate(DeferredObject[] currentKey) throws HiveException {
     if (!sameAsPreviousKey(currentKey)) {
@@ -39,7 +42,8 @@ public class Rank extends GenericUDF {
       copyToPreviousKey(currentKey);
     }
 
-    return new Long(++this.counter);
+    result.set(++this.counter);
+    return result.get();
   }
 
   @Override
