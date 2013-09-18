@@ -68,10 +68,13 @@ public class Rank extends GenericUDF {
             if (previousKey == null) {
                 previousKey = new Object[currentKey.length];
             }
-        for (int index = 0; index < currentKey.length; index++) {   
-            previousKey[index]= ObjectInspectorUtils
-                    .copyToStandardObject(currentKey[index].get(),this.ois[index]);
-
+            for (int index = 0; index < currentKey.length; index++) {   
+                if (currentKey[index] == null) {
+                     previousKey[index]=null;
+                     continue;
+                }
+                previousKey[index]= ObjectInspectorUtils
+                        .copyToStandardObject(currentKey[index].get(),this.ois[index]);
             }
         }   
     }
@@ -106,6 +109,7 @@ public class Rank extends GenericUDF {
       }
       status = true;
     }
+
     return status;
   }
 }
